@@ -1,5 +1,6 @@
 ﻿using Library.DataAccess;
 using Library.Models;
+using System.Net;
 
 namespace Library.Logic
 {
@@ -14,20 +15,22 @@ namespace Library.Logic
             booksCache = repository.GetBooks();
         }
 
-        public void AddBook(string id, string title, List<string> authors)
+        public void AddBook(string id, string title, List<string> authors, Genre genre)
         {
-            if (booksCache.Any(b => b.Id == id))
+            if (!IsValidBookId(id))
+                throw new ArgumentException("Book ID must be a 12-character alphanumeric string.");
+            else if (booksCache.Any(b => b.Id == id))
                 throw new Exception("Book ID already exists.");
-            if (string.IsNullOrEmpty(title) || title.Length < 4)
+            else if (string.IsNullOrEmpty(title) || title.Length < 4)
                 throw new Exception($"Title must be at least 4 characters long, '{title}' is not.");
 
-            var newBook = new Book { Id = id, Title = title, Authors = authors, Genre = "Undefined" };
+            var newBook = new Book { Id = id, Title = title, Authors = authors, Genre = genre };
             booksCache.Add(newBook);
 
             LogAction("Create", title);
         }
 
-        public void SetGenre(string id, string genre)
+        public void SetGenre(string id, Genre genre)
         {
             var book = booksCache.FirstOrDefault(b => b.Id == id);
             if (book == null)
@@ -51,6 +54,13 @@ namespace Library.Logic
         }
 
         public List<Book> ListBooks() => booksCache;
+
+        private bool IsValidBookId(string bookId)
+        {
+            return !string.IsNullOrEmpty(bookId) &&
+                   bookId.Length == 12 &&
+                   bookId.All(char.IsLetterOrDigit);
+        }
 
         private void LogAction(string action, string bookTitle)
         {
