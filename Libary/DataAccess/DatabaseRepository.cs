@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Libary.DataAccess
 {
-    internal class DatabaseRepository : IRepository
+    public class DatabaseRepository : IRepository
     {
         public List<Book> GetBooks() => new List<Book>();
         public void SaveBooks(List<Book> books) { /* kód */ }

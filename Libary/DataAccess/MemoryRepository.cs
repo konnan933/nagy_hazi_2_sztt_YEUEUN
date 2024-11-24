@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Libary.DataAccess
 {
-    internal class MemoryRepository : IRepository
+    public class MemoryRepository : IRepository
     {
         private List<Book> books = new List<Book>();
         private readonly Dictionary<int, string> users = new()

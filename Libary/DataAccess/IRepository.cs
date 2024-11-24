@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Libary.DataAccess
 {
-    internal interface IRepository
+    public interface IRepository
     {
         List<Book> GetBooks();
         void SaveBooks(List<Book> books);
