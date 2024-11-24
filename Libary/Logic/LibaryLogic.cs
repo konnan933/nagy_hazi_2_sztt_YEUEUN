@@ -18,11 +18,13 @@ namespace Library.Logic
         public void AddBook(string id, string title, List<string> authors, Genre genre)
         {
             if (!IsValidBookId(id))
-                throw new ArgumentException("Book ID must be a 12-character alphanumeric string.");
+                throw new BookValidationException("Book ID must be a 12-character alphanumeric string.");
             else if (booksCache.Any(b => b.Id == id))
-                throw new Exception("Book ID already exists.");
+                throw new BookValidationException("Book ID already exists.");
             else if (string.IsNullOrEmpty(title) || title.Length < 4)
-                throw new Exception($"Title must be at least 4 characters long, '{title}' is not.");
+                throw new BookValidationException($"Title must be at least 4 characters long, '{title}' is not.");
+            else if (!IsValidAuthorList(authors))
+                throw new BookValidationException("Book must have at least one valid author.");
 
             var newBook = new Book { Id = id, Title = title, Authors = authors, Genre = genre };
             booksCache.Add(newBook);
@@ -34,7 +36,7 @@ namespace Library.Logic
         {
             var book = booksCache.FirstOrDefault(b => b.Id == id);
             if (book == null)
-                throw new Exception("Book not found.");
+                throw new BookValidationException("Book not found.");
 
             book.Genre = genre;
             LogAction("SetGenre", book.Title);
@@ -60,6 +62,10 @@ namespace Library.Logic
             return !string.IsNullOrEmpty(bookId) &&
                    bookId.Length == 12 &&
                    bookId.All(char.IsLetterOrDigit);
+        }
+        private bool IsValidAuthorList(List<string> authors)
+        {
+            return authors != null && authors.All(author => !string.IsNullOrWhiteSpace(author)) && authors.Count > 0;
         }
 
         private void LogAction(string action, string bookTitle)

@@ -13,8 +13,9 @@ namespace Library
             try
             {
                 libraryLogic.AddBook("BOOK12345678", "Dune", new List<string> { "Frank Herbert" }, Genre.Drama);
-                libraryLogic.AddBook("BOOK87654321", "It", new List<string> { "Stephen King" }, Genre.Horror);
+                libraryLogic.AddBook("BOOK91235412", "Dune II", new List<string> { "Frank Herbert" }, Genre.SciFi);
                 libraryLogic.AddBook("BOOK12349876", "1984", new List<string> { "George Orwell" }, Genre.SciFi);
+                //libraryLogic.AddBook("BOOK87654321", "It", new List<string> { "Stephen King" }, Genre.Horror);
 
                 libraryLogic.AddBook("INVALIDID", "No", new List<string> { "Unknown" }, Genre.Classic);
 
