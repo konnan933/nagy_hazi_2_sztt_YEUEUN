@@ -1,7 +1,7 @@
-﻿using Libary.DataAccess;
-using Libary.Models;
+﻿using Library.DataAccess;
+using Library.Models;
 
-namespace Libary.Logic
+namespace Library.Logic
 {
     public class LibaryLogic
     {
@@ -19,7 +19,7 @@ namespace Libary.Logic
             if (booksCache.Any(b => b.Id == id))
                 throw new Exception("Book ID already exists.");
             if (string.IsNullOrEmpty(title) || title.Length < 4)
-                throw new Exception("Title must be at least 4 characters long.");
+                throw new Exception($"Title must be at least 4 characters long, '{title}' is not.");
 
             var newBook = new Book { Id = id, Title = title, Authors = authors, Genre = "Undefined" };
             booksCache.Add(newBook);

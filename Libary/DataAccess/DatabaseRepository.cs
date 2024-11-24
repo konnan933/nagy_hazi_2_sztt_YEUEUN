@@ -1,11 +1,11 @@
-﻿using Libary.Models;
+﻿using Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Libary.DataAccess
+namespace Library.DataAccess
 {
     public class DatabaseRepository : IRepository
     {

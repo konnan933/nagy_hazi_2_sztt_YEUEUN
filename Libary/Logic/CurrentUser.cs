@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Libary.Logic
+namespace Library.Logic
 {
     public class CurrentUser
     {

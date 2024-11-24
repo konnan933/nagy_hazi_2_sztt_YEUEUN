@@ -1,11 +1,11 @@
-﻿using Libary.Models;
+﻿using Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Libary.DataAccess
+namespace Library.DataAccess
 {
     public class MemoryRepository : IRepository
     {
@@ -13,7 +13,8 @@ namespace Libary.DataAccess
         private readonly Dictionary<int, string> users = new()
         {
             { 1, "Admin" },
-            { 2, "Jancsika" }
+            { 2, "Jancsika" },
+            { 17, "Attila" }
         };
 
         public List<Book> GetBooks() => books;
